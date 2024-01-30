@@ -1,0 +1,17 @@
+IdentityFile ~/.ssh/id_ecdsa_lakshmi
+Host vsphere
+    Hostname als-otp1.lbl.gov
+    PKCS11Provider /Library/OpenSC/lib/onepin-opensc-pkcs11.so 
+    DynamicForward 2529
+    LocalForward 127.0.0.1:2526 als-vcenter.lbl.gov:443
+    LogLevel DEBUG
+
+Host als-otp1
+    Hostname als-otp1.lbl.gov
+    PKCS11Provider /Library/OpenSC/lib/onepin-opensc-pkcs11.so 
+
+Host ctrl
+    Hostname access-ctrl1.als.lbl.gov
+
+Host devl
+    Hostname access-devl1.als.lbl.gov
