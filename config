@@ -15,3 +15,103 @@ Host ctrl
 
 Host devl
     Hostname access-devl1.als.lbl.gov
+
+Host scs-cm
+	HostName scs-cm.lbl.gov
+	ProxyCommand ssh -W %h:%p access2
+
+Host alsansible
+    Hostname alsansible.als.lbl.gov
+    ProxyCommand ssh -W %h:%p ctrl-bastion
+
+Host scs-cm-backup
+	HostName scs-cm.lbl.gov
+	ProxyCommand ssh -W %h:%p access2-backup
+
+Host cgsrv2
+	HostName cgsrv2.als.lbl.gov
+	ProxyCommand ssh -W %h:%p ctrl-bastion
+
+Host phys1
+	HostName phys1.als.lbl.gov
+	ProxyCommand ssh -W %h:%p devl-bastion
+
+Host appsdev
+    Hostname appsdev.als.lbl.gov
+    ProxyCommand ssh -W %h:%p ctrl-bastion
+	
+Host seismo-jump
+	HostName seismo-login.lbl.gov
+	User sjwong
+	LocalForward 8787 localhost:8787
+	
+Host seismo-tunnel
+	Hostname seismo2.lbl.gov
+	User sjwong
+	ProxyJump seismo-jump
+	LocalForward 8787 localhost:5999
+
+Host als-jump
+	HostName access2.als.lbl.gov
+	User sjwong
+	LocalForward 8787 localhost:8787
+
+Host apps2-6
+	HostName apps2.als.lbl.gov
+	User sjwong
+	ProxyJump als-jump
+	LocalForward 8787 localhost:5906
+
+Host snowbear
+	Hostname snowbear.lbl.gov
+	User sjwong
+	ProxyJump sls-jump
+
+Host sls-jump
+	#Hostname sls.lbl.gov
+	Hostname lrc-xfer.lbl.gov
+	User sjwong
+
+Host appsdev-local-vnc
+    Hostname appsdev.als.lbl.gov
+    ProxyJump ctrl-bastion
+    LocalForward 8900 localhost:5999
+
+Host apps1-vnc-forward
+	Hostname apps1.als.lbl.gov
+	ProxyJump ctrl-bastion
+	LocalForward 8900 localhost:5900
+	LocalForward 8901 localhost:5901
+	LocalForward 8902 localhost:5902
+	LocalForward 8903 localhost:5903
+	LocalForward 8904 localhost:5904
+	LocalForward 8905 localhost:5905
+	User sjwong
+
+Host apps2-vnc-forward
+	Hostname apps2.als.lbl.gov
+	ProxyJump ctrl-bastion
+	LocalForward 9900 localhost:5900
+	LocalForward 9906 localhost:5906
+	LocalForward 9907 localhost:5907
+	LocalForward 9908 localhost:5908
+	LocalForward 9909 localhost:5909
+	LocalForward 9910 localhost:5910
+	User sjwong
+
+Host lakshmi
+    Hostname lakshmi.lbl.gov
+    User sjwong
+    IdentityFile ~/.ssh/id_ecdsa
+
+Host phys1-vnc
+    Hostname phys1.als.lbl.gov
+    User sjwong
+    ProxyJump devl-bastion
+    LocalForward 4444 localhost:5900
+
+Host phys1-vnc-virt
+    Hostname phys1.als.lbl.gov
+    User sjwong
+    ProxyJump devl-bastion
+    LocalForward 4449 localhost:5999
