@@ -10,11 +10,15 @@ Host als-otp1
     Hostname als-otp1.lbl.gov
     PKCS11Provider /Library/OpenSC/lib/onepin-opensc-pkcs11.so 
 
-Host ctrl
-    Hostname access-ctrl1.als.lbl.gov
-
 Host devl
-    Hostname access-devl1.als.lbl.gov
+	HostName access-devl2.als.lbl.gov
+Host devl-bastion
+	HostName access-devl2.als.lbl.gov
+
+Host ctrl
+	HostName access-ctrl1.als.lbl.gov
+Host ctrl-bastion
+	HostName access-ctrl1.als.lbl.gov
 
 Host scs-cm
 	HostName scs-cm.lbl.gov
